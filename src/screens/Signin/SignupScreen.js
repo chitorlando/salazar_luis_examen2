@@ -24,7 +24,7 @@ const SigninScreen = ({ route, navigation }) => {
       navigation.navigate("GetStarted");
     }
   };
-//primer commit
+//primer commit - análisis de desarrollo
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
       { text: "OK", onPress: () => console.log("OK Pressed") },
