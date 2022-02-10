@@ -116,6 +116,7 @@ const SigninScreen = ({ route, navigation }) => {
         onChangeText={(text) => setEmail(text)}
       />
 
+      //contraseña visible
       <TextInput
         placeholder="Contraseña"
         style={styles.input}
