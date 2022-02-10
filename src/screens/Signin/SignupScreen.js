@@ -24,7 +24,7 @@ const SigninScreen = ({ route, navigation }) => {
       navigation.navigate("GetStarted");
     }
   };
-//primer commit - análisis de desarrollo
+//primer commit - análisis de desarrollo 'instalación de regex'
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
       { text: "OK", onPress: () => console.log("OK Pressed") },
