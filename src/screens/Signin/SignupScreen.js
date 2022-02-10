@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { useEffect } from "react/cjs/react.production.min";
 import { colors } from "../../assets";
@@ -18,11 +18,11 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
   const [correo, setCorreo] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     obtenerUsuarios_losr();
   }, [])
 
-  const obtenerUsuarios_losr = async()=>{
+  const obtenerUsuarios_losr = async () => {
     const rta = await getUsers()
     const correo = rta.map(user => user.mail)
     setCorreo(correo)
@@ -35,36 +35,42 @@ const SigninScreen = ({ route, navigation }) => {
       notifyMessage("Usuario creado correctamente");
       navigation.navigate("GetStarted");
     }*/
+  };
 
-    //validación de cédula 
-    function validar_losr(str) {
-      var tot = 0;
-      var long = str.length;
-      var longcheck = long - 1;
-      var ok = false;
-      if (str !== "" && long === 10) {
-        for (let i = 0; i < longcheck; i++) {
-          if (i % 2 === 0) {
-            var aux = str.charAt(i) * 2;
-            if (aux > 9) aux -= 9;
-            tot += aux;
-          } else {
-            tot += parseInt(str.charAt(i));
-          }
-        }
-
-        tot = tot % 10 ? 10 - (tot % 10) : 0;
-
-        if (str.charAt(long - 1) == tot) {
-          ok = true;
+  //validación de contraseña dentro de los parámetros requeridos
+  function validar_pass_losr(valor){
+    var myregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/; 
+   if(myregex.test(valor)){
+       return true;        
+   }else{
+      return false;        
+   }   
+ }
+  //validación de cédula 
+  function validar_ci_losr(str) {
+    var tot = 0;
+    var long = str.length;
+    var longcheck = long - 1;
+    var ok = false;
+    if (str !== "" && long === 10) {
+      for (let i = 0; i < longcheck; i++) {
+        if (i % 2 === 0) {
+          var aux = str.charAt(i) * 2;
+          if (aux > 9) aux -= 9;
+          tot += aux;
         } else {
-          ok = false;
+          tot += parseInt(str.charAt(i));
         }
       }
-      return ok;
+      tot = tot % 10 ? 10 - (tot % 10) : 0;
+      if (str.charAt(long - 1) == tot) {
+        ok = true;
+      } else {
+        ok = false;
+      }
     }
-    //validación de contraseña dentro de los parámetros requeridos
-  };
+    return ok;
+  }
 
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
