@@ -60,7 +60,6 @@ const Login = ({ navigation }) => {
         placeholder="Constraseña"
         style={styles.input}
         onChangeText={(text) => setPassword(text)}
-        secureTextEntry
       />
 
       {isValidPassword ? null : (

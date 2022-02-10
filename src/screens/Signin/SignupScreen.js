@@ -105,13 +105,13 @@ const SigninScreen = ({ route, navigation }) => {
       <Gap height={60} />
 
       <TextInput
-        placeholder="Cédula"
+        placeholder="Cédula 'validada al estándar legal'"
         style={styles.input}
         onChangeText={(text) => setUserName(text)}
       />
 
       <TextInput
-        placeholder="Correo electronico"
+        placeholder="Correo electrónico"
         style={styles.input}
         onChangeText={(text) => setEmail(text)}
       />
