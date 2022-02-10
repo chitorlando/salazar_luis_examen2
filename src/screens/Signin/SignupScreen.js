@@ -17,16 +17,43 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
 
   const handleSignup = (username, email, password) => {
-    const t = signUp(username, email, password);
+    /*const t = signUp(username, email, password);
     if (t != undefined) {
       setCreado(true);
       notifyMessage("Usuario creado correctamente");
       navigation.navigate("GetStarted");
+    }*/
+    //validación de cédula 
+    function validar_losr(str) {
+      var tot = 0;
+      var long = str.length;
+      var longcheck = long - 1;
+      var ok = false;
+  
+      if (str !== "" && long === 10) {
+        for (let i = 0; i < longcheck; i++) {
+          if (i % 2 === 0) {
+            var aux = str.charAt(i) * 2;
+            if (aux > 9) aux -= 9;
+            tot += aux;
+          } else {
+            tot += parseInt(str.charAt(i));
+          }
+        }
+  
+        tot = tot % 10 ? 10 - (tot % 10) : 0;
+  
+        if (str.charAt(long - 1) == tot) {
+          ok = true;
+        } else {
+          ok = false;
+        }
+      }
+      return ok;
     }
+    //validación de contraseña dentro de los parámetros requeridos
   };
-//primer commit - análisis de desarrollo 'instalación de regex'
-//prueba en web de expresion regular
-//validadndo ci
+
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
       { text: "OK", onPress: () => console.log("OK Pressed") },
