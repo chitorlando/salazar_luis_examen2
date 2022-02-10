@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { useEffect } from "react/cjs/react.production.min";
 import { colors } from "../../assets";
@@ -18,15 +18,9 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
   const [correo, setCorreo] = useState([])
 
-  useEffect(() => {
-    obtenerUsuarios_losr();
-  }, [])
+  
 
-  const obtenerUsuarios_losr = async () => {
-    const rta = await getUsers()
-    const correo = rta.map(user => user.mail)
-    setCorreo(correo)
-  }
+
 
   const handleSignup = (username, email, password) => {
     /*const t = signUp(username, email, password);
@@ -35,17 +29,31 @@ const SigninScreen = ({ route, navigation }) => {
       notifyMessage("Usuario creado correctamente");
       navigation.navigate("GetStarted");
     }*/
+    const ced_ok = validar_ci_losr(username)
+    const pass_ok = validar_pass_losr(password)
+    const email_ok = validar_correo_losr(email)
+    console.log('ced', ced_ok);
+    console.log('pass', pass_ok);
+    console.log('email', email_ok);
   };
 
+  const validar_correo_losr = (email) => {
+    const ok = correo.some(mail => mail === email);
+    return !ok;
+  }
+  
+  useEffect(() => {
+    obtenerUsuarios_losr();
+  }, [])
   //validación de contraseña dentro de los parámetros requeridos
-  function validar_pass_losr(valor){
-    var myregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/; 
-   if(myregex.test(valor)){
-       return true;        
-   }else{
-      return false;        
-   }   
- }
+  function validar_pass_losr(entrada) {
+    var myregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/;
+    if (myregex.test(entrada)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   //validación de cédula 
   function validar_ci_losr(str) {
     var tot = 0;
