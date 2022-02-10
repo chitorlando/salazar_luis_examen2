@@ -111,7 +111,7 @@ const SigninScreen = ({ route, navigation }) => {
       />
 
       <TextInput
-        placeholder="Correo electrónico"
+        placeholder="Correo electró"
         style={styles.input}
         onChangeText={(text) => setEmail(text)}
       />
