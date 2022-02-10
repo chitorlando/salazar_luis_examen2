@@ -47,12 +47,11 @@ const SigninScreen = ({ route, navigation }) => {
     }
   };
 
+  //validacion de correo existente
   const validar_correo_losr = (email) => {
     const ok = correo.some(mail => mail === email);
     return !ok;
   }
-
-
 
   //validación de contraseña dentro de los parámetros requeridos
   function validar_pass_losr(entrada) {
@@ -63,6 +62,7 @@ const SigninScreen = ({ route, navigation }) => {
       return false;
     }
   }
+
   //validación de cédula 
   function validar_ci_losr(str) {
     var tot = 0;
