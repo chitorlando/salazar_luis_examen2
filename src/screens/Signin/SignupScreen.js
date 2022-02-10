@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect} from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
+import { useEffect } from "react/cjs/react.production.min";
 import { colors } from "../../assets";
 import { Button, Gap } from "../../components/atoms";
 
@@ -15,6 +16,17 @@ const SigninScreen = ({ route, navigation }) => {
   const [isValidPassword, setIsValidPassword] = useState(true);
 
   const { signUp } = useContext(AuthContext);
+  const [correo, setCorreo] = useState([])
+
+  useEffect(()=>{
+    obtenerUsuarios_losr();
+  }, [])
+
+  const obtenerUsuarios_losr = async()=>{
+    const rta = await getUsers()
+    const correo = rta.map(user => user.mail)
+    setCorreo(correo)
+  }
 
   const handleSignup = (username, email, password) => {
     /*const t = signUp(username, email, password);
@@ -23,13 +35,13 @@ const SigninScreen = ({ route, navigation }) => {
       notifyMessage("Usuario creado correctamente");
       navigation.navigate("GetStarted");
     }*/
+
     //validación de cédula 
     function validar_losr(str) {
       var tot = 0;
       var long = str.length;
       var longcheck = long - 1;
       var ok = false;
-  
       if (str !== "" && long === 10) {
         for (let i = 0; i < longcheck; i++) {
           if (i % 2 === 0) {
@@ -40,9 +52,9 @@ const SigninScreen = ({ route, navigation }) => {
             tot += parseInt(str.charAt(i));
           }
         }
-  
+
         tot = tot % 10 ? 10 - (tot % 10) : 0;
-  
+
         if (str.charAt(long - 1) == tot) {
           ok = true;
         } else {
