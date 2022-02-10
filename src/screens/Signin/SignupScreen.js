@@ -37,9 +37,14 @@ const SigninScreen = ({ route, navigation }) => {
     const ced_ok = validar_ci_losr(username)
     const pass_ok = validar_pass_losr(password)
     const email_ok = validar_correo_losr(email)
-    console.log('ced', ced_ok);
-    console.log('pass', pass_ok);
-    console.log('email', email_ok);
+    if (ced_ok && pass_ok && email_ok) {
+      const rta = signUp(username, email, password);
+      rta.then(console.log);
+      notifyMessage("Usuario creado satisfactoriamente");
+      navigation.navigate("GetStarted");
+    } else {
+      notifyMessage("Revise el ingreso, datos incorrectos");
+    }
   };
 
   const validar_correo_losr = (email) => {
@@ -100,7 +105,7 @@ const SigninScreen = ({ route, navigation }) => {
       <Gap height={60} />
 
       <TextInput
-        placeholder="Nombre de usuario"
+        placeholder="Cédula"
         style={styles.input}
         onChangeText={(text) => setUserName(text)}
       />
@@ -112,10 +117,9 @@ const SigninScreen = ({ route, navigation }) => {
       />
 
       <TextInput
-        placeholder="Constraseña"
+        placeholder="Contraseña"
         style={styles.input}
         onChangeText={(text) => setPassword(text)}
-        secureTextEntry
       />
 
       {isValidUser ? null : (
