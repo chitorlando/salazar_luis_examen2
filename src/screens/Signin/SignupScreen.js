@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
-import { useEffect } from "react/cjs/react.production.min";
 import { colors } from "../../assets";
 import { Button, Gap } from "../../components/atoms";
-
+import { getUsers } from '../../api'
 import { AuthContext } from "../../components/context";
 
 const SigninScreen = ({ route, navigation }) => {
@@ -18,9 +17,15 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
   const [correo, setCorreo] = useState([])
 
-  
+  useEffect(() => {
+    obtenerUsuarios_losr();
+  }, [])
 
-
+  const obtenerUsuarios_losr = async () => {
+    const rta = await getUsers()
+    const correo = rta.map(user => user.email)
+    setCorreo(correo)
+  }
 
   const handleSignup = (username, email, password) => {
     /*const t = signUp(username, email, password);
@@ -41,10 +46,9 @@ const SigninScreen = ({ route, navigation }) => {
     const ok = correo.some(mail => mail === email);
     return !ok;
   }
-  
-  useEffect(() => {
-    obtenerUsuarios_losr();
-  }, [])
+
+
+
   //validación de contraseña dentro de los parámetros requeridos
   function validar_pass_losr(entrada) {
     var myregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/;

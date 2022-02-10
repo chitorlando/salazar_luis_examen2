@@ -89,7 +89,7 @@ const createOrder = async (token, body) => {
   }
 }
 
-const getUsers_losr = async () =>{
+const getUsers = async () =>{
   try {
     const endpoint = `${API}/users/`
     const rta = await axiosRequest.get(endpoint)
@@ -99,6 +99,6 @@ const getUsers_losr = async () =>{
   }
 }
 
-export { createOrder, getOrders, getProducts, AuthLogin, AuthSingup, getUserbyId, getOrdersByUserId, getUsers_losr};
+export { createOrder, getOrders, getProducts, AuthLogin, AuthSingup, getUserbyId, getOrdersByUserId, getUsers};
 
 
