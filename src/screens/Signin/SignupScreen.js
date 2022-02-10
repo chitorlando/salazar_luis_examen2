@@ -25,7 +25,8 @@ const SigninScreen = ({ route, navigation }) => {
     }
   };
 //primer commit - análisis de desarrollo 'instalación de regex'
-//prueba en wev de expresion regular
+//prueba en web de expresion regular
+//validadndo ci
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
       { text: "OK", onPress: () => console.log("OK Pressed") },
